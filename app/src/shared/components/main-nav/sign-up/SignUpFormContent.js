@@ -1,6 +1,8 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {FormDebugger} from "../../FormDebugger";
 import React from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faKey, faEnvelope,faFlagUsa, faUser, faDove} from "@fortawesome/free-solid-svg-icons";
+import {FormDebugger} from "../../FormDebugger";
+
 
 export const SignUpFormContent = (props) => {
 	const {
@@ -13,18 +15,102 @@ export const SignUpFormContent = (props) => {
 		handleChange,
 		handleBlur,
 		handleSubmit,
-		handleReset
+		handleReset,
+		handleClose
 	} = props;
 	return (
 		<>
 			<form onSubmit={handleSubmit}>
 				{/*controlId must match what is passed to the initialValues prop*/}
 				<div className="form-group">
+					<label htmlFor="profileName">Name</label>
+					<div className="input-group">
+						<div className="input-group-prepend">
+							<div className="input-group-text">
+								<FontAwesomeIcon icon={faFlagUsa}/>
+							</div>
+						</div>
+						<input
+							className="form-control"
+							id="profileName"
+							type="text"
+							value={values.profileName}
+							placeholder="First name Last name"
+							onChange={handleChange}
+							onBlur={handleBlur}
+
+						/>
+					</div>
+					{
+						errors.profileName && touched.profileName && (
+							<div className="alert alert-danger">
+								{errors.profileName}
+							</div>
+						)
+					}
+				</div>
+
+				<div className="form-group">
+					<label htmlFor="profileUsername">Username</label>
+					<div className="input-group">
+						<div className="input-group-prepend">
+							<div className="input-group-text">
+								<FontAwesomeIcon icon={faUser}/>
+							</div>
+						</div>
+						<input
+							className="form-control"
+							id="profileUsername"
+							type="text"
+							value={values.profileUsername}
+							placeholder="Username"
+							onChange={handleChange}
+							onBlur={handleBlur}
+
+						/>
+					</div>
+					{
+						errors.profileUsername && touched.profileUsername && (
+							<div className="alert alert-danger">
+								{errors.profileUsername}
+							</div>
+						)
+					}
+				</div>
+
+				<div className="form-group">
+					<label htmlFor="profileType">Type</label>
+					<div className="input-group">
+						<div className="input-group-prepend">
+							<div className="input-group-text">
+								<FontAwesomeIcon icon={faDove}/>
+							</div>
+						</div>
+						<input
+							className="form-control"
+							id="profileType"
+							type="text"
+							value={values.profileType}
+							placeholder="Soldier or Sender are the only two options"
+							onChange={handleChange}
+							onBlur={handleBlur}
+
+						/>
+					</div>
+					{
+						errors.profileType && touched.profileType && (
+							<div className="alert alert-danger">
+								{errors.profileType}
+							</div>
+						)
+					}
+				</div>
+				<div className="form-group">
 					<label htmlFor="profileEmail">Email Address</label>
 					<div className="input-group">
 						<div className="input-group-prepend">
 							<div className="input-group-text">
-								<FontAwesomeIcon icon="envelope"/>
+								<FontAwesomeIcon icon={faEnvelope}/>
 							</div>
 						</div>
 						<input
@@ -53,7 +139,7 @@ export const SignUpFormContent = (props) => {
 					<div className="input-group">
 						<div className="input-group-prepend">
 							<div className="input-group-text">
-								<FontAwesomeIcon icon="key"/>
+								<FontAwesomeIcon icon={faKey}/>
 							</div>
 						</div>
 						<input
@@ -75,7 +161,7 @@ export const SignUpFormContent = (props) => {
 					<div className="input-group">
 						<div className="input-group-prepend">
 							<div className="input-group-text">
-								<FontAwesomeIcon icon="key"/>
+								<FontAwesomeIcon icon={faKey}/>
 							</div>
 						</div>
 						<input
@@ -96,77 +182,20 @@ export const SignUpFormContent = (props) => {
 
 
 				<div className="form-group">
-					<label htmlFor="profileHandle">@Handle</label>
-					<div className="input-group">
-						<div className="input-group-prepend">
-							<div className="input-group-text">
-								<FontAwesomeIcon icon="dove"/>
-							</div>
-						</div>
-						<input
-							className="form-control"
-							id="profileHandle"
-							type="text"
-							value={values.profileAtHandle}
-							placeholder="@Handle"
-							onChange={handleChange}
-							onBlur={handleBlur}
-
-						/>
-					</div>
-					{
-						errors.profileAtHandle && touched.profileAtHandle && (
-							<div className="alert alert-danger">
-								{errors.profileAtHandle}
-							</div>
-						)
-					}
-				</div>
-
-
-				<div className="form-group">
-					<label htmlFor="profilePhone">Phone Number</label>
-					<div className="input-group">
-						<div className="input-group-prepend">
-							<div className="input-group-text">
-								<FontAwesomeIcon icon="phone"/>
-							</div>
-						</div>
-						<input
-							className="form-control"
-							id="profilePhone"
-							type="text"
-							value={values.profilePhone}
-							placeholder="Enter email"
-							onChange={handleChange}
-							onBlur={handleBlur}
-						/>
-					</div>
-					{
-						errors.profilePhone && touched.profilePhone && (
-							<div className="alert alert-danger">
-								{errors.profilePhone}
-							</div>
-						)
-
-					}
-				</div>
-				<div className="form-group">
-					<button className="btn btn-primary mb-2" type="submit">Submit</button>
+					<button className="btn btn-primary mb-2 m-1"
+							  onSubmit={handleSubmit}
+							  disabled={isSubmitting}
+							  type="submit">Submit {isSubmitting ? "Registering ..." : "Register"}
+					</button>
 					<button
-						className="btn btn-danger mb-2"
+						className="btn btn-danger mb-2 m-1"
 						onClick={handleReset}
 						disabled={!dirty || isSubmitting}
 					>Reset
 					</button>
 				</div>
-
-
-				<FormDebugger {...props} />
+				{/*<FormDebugger {...props} />*/}
 			</form>
-			{console.log(
-				submitStatus
-			)}
 			{
 				submitStatus && (<div className={submitStatus.type}>{submitStatus.message}</div>)
 			}
