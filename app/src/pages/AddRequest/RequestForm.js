@@ -1,9 +1,9 @@
 import React from 'react';
 import {UseJwt, UseJwtProfileUsername} from "../../shared/utils/JwtHelpers";
-import {Formik} from "formik/dist/index";
+import {Formik} from "formik/dist";
 import * as Yup from "yup";
 import {RequestContent} from "./RequestContent";
-import {httpConfig} from "../../shared/utils/http-config.js";
+import {httpConfig} from "../../shared/utils/http-config";
 
 
 
